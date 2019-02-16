@@ -28,7 +28,7 @@ func main() {
 	r := gin.Default()
 	r.POST("/webhook", handleWebhook)
 
-	if err = r.Run("127.0.0.1:8080"); err != nil {
+	if err = r.Run("0.0.0.0:8080"); err != nil {
 		logrus.WithError(err).Fatal("Couldn't start server")
 	}
 }

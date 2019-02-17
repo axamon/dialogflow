@@ -20,6 +20,7 @@ func handleWebhook(c *gin.Context) {
 		return
 	}
 	fmt.Println(wr.GetQueryResult().GetOutputContexts())
+	fmt.Println(wr.GetQueryResult().GetParameters().GetFields())
 }
 
 func main() {

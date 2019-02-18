@@ -20,8 +20,13 @@ func handleWebhook(c *gin.Context) {
 		return
 	}
 	fmt.Println(wr.GetQueryResult().GetOutputContexts())
+	fmt.Println("")
 	fmt.Println(wr.GetQueryResult().GetParameters())
+	fmt.Println("")
+	fmt.Println(wr.GetQueryResult().GetParameters().GetFields())
+	fmt.Println("")
 	fmt.Println(wr.GetQueryResult().GetQueryText())
+	fmt.Println("")
 	fields := wr.GetQueryResult().GetParameters().GetFields()
 
 	fmt.Println("")

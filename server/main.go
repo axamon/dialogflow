@@ -24,6 +24,8 @@ func handleWebhook(c *gin.Context) {
 
 	fmt.Println("")
 
+	fmt.Println(fields)
+
 	nome := fields["given-name"]
 	servizio := fields["servizi"]
 	mailcliente := fields["email"]

@@ -24,9 +24,11 @@ func handleWebhook(c *gin.Context) {
 
 	fmt.Println("")
 
-	nome := fields["nome"]
+	nome := fields["given-name"]
+	servizio := fields["servizi"]
+	mailcliente := fields["email"]
 
-	fmt.Println(nome.GetStringValue())
+	fmt.Println(nome.GetStringValue(), servizio.GetStringValue(), mailcliente.GetStringValue())
 }
 
 func main() {

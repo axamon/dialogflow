@@ -20,12 +20,20 @@ func handleWebhook(c *gin.Context) {
 		return
 	}
 
-	//	rr := dialogflow.WebhookResponse{}
+	rr := dialogflow.WebhookResponse{}
+
+	cercorisposta := dialogflow.EventInput{
+		Name: "input.Risposta",
+	}
+
+	if rr.FollowupEventInput == &cercorisposta {
+		rr.FulfillmentText = "Non lo so"
+	}
 
 	q := wr.GetQueryResult()
 	f := q.GetFulfillmentMessages()
 
-	fmt.Println(f)
+	fmt.Println("la richiesta è ", f)
 
 	fmt.Println(wr.GetQueryResult().GetOutputContexts())
 	fmt.Println("")

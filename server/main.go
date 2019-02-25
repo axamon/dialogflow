@@ -7,7 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/golang/protobuf/jsonpb"
 	"github.com/sirupsen/logrus"
-	"google.golang.org/genproto/googleapis/cloud/dialogflow/v2"
+	dialogflow "google.golang.org/genproto/googleapis/cloud/dialogflow/v2"
 )
 
 func handleWebhook(c *gin.Context) {
@@ -19,6 +19,14 @@ func handleWebhook(c *gin.Context) {
 		c.Status(http.StatusBadRequest)
 		return
 	}
+
+	//	rr := dialogflow.WebhookResponse{}
+
+	q := wr.GetQueryResult()
+	f := q.GetFulfillmentMessages()
+
+	fmt.Println(f)
+
 	fmt.Println(wr.GetQueryResult().GetOutputContexts())
 	fmt.Println("")
 	fmt.Println(wr.GetQueryResult().GetParameters())
@@ -33,7 +41,7 @@ func handleWebhook(c *gin.Context) {
 
 	fmt.Println(fields)
 
-	nome := fields["given-name"]
+	nome := fields["nome"]
 	servizio := fields["servizi"]
 	mailcliente := fields["email"]
 
@@ -41,6 +49,27 @@ func handleWebhook(c *gin.Context) {
 	fmt.Println(servizio.GetStringValue())
 	fmt.Println(mailcliente.GetStringValue())
 }
+
+/*
+integrazione con mantis
+w920KUdcZNzbNTveqCPW0-QLz7pVzUlS
+
+curl --location --request POST "https://mantisomd.westeurope.cloudapp.azure.com/api/rest/issues/" \
+  --header "Authorization: w920KUdcZNzbNTveqCPW0-QLz7pVzUlS" \
+  --header "Content-Type: application/json" \
+  --data "{
+  \"summary\": \"This is a test issue\",
+  \"description\": \"This is a test description\",
+  \"category\": {
+    \"name\": \"General\"
+  },
+  \"project\": {
+  	\"id\": 500,
+    \"name\": \"mantisbt2\"
+  }
+}"
+
+*/
 
 func main() {
 	var err error
